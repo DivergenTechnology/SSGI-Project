@@ -1,37 +1,42 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "Z.ai Code Scaffold - AI-Powered Development",
-  description: "Modern Next.js scaffold optimized for AI-powered development with Z.ai. Built with TypeScript, Tailwind CSS, and shadcn/ui.",
-  keywords: ["Z.ai", "Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "AI development", "React"],
-  authors: [{ name: "Z.ai Team" }],
+  title: "IWCYES · IWSS Dashboard — Irrigated Wheat Decision Support (Ethiopia)",
+  description:
+    "Remote sensing-enabled decision support system for irrigated wheat farming across the Bishoftu, Asella, and Ambo agricultural research institutes in Ethiopia. Provides yield estimation, irrigation scheduling, and UAV-based disease detection with attention-based ML attribution.",
+  keywords: [
+    "IWCYES",
+    "IWSS",
+    "Ethiopia",
+    "irrigated wheat",
+    "remote sensing",
+    "Sentinel-2",
+    "UAV multispectral",
+    "attention mechanism",
+    "decision support",
+    "PostGIS",
+    "Firebase",
+    "Bishoftu",
+    "Asella",
+    "Ambo",
+  ],
+  authors: [{ name: "IWCYES-IWSS Project Team" }],
   icons: {
-    icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
+    icon: "/logo.svg",
   },
   openGraph: {
-    title: "Z.ai Code Scaffold",
-    description: "AI-powered development with modern React stack",
-    url: "https://chat.z.ai",
-    siteName: "Z.ai",
+    title: "IWCYES · IWSS Dashboard",
+    description:
+      "Remote sensing-enabled decision support system for irrigated wheat farming in Ethiopia",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Z.ai Code Scaffold",
-    description: "AI-powered development with modern React stack",
+    title: "IWCYES · IWSS Dashboard",
+    description:
+      "Remote sensing-enabled decision support system for irrigated wheat farming in Ethiopia",
   },
 };
 
@@ -42,9 +47,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
-      >
+      <body className="antialiased bg-background text-foreground">
         {children}
         <Toaster />
       </body>

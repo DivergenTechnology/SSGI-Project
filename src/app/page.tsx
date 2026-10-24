@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
 import { SectionId, SiteId } from '@/lib/types';
 import { SidebarNav } from '@/components/dashboard/sidebar-nav';
 import { OverviewSection } from '@/components/dashboard/sections/overview-section';
-import { MapSection } from '@/components/dashboard/sections/map-section';
 import { YieldSection } from '@/components/dashboard/sections/yield-section';
 import { IrrigationSection } from '@/components/dashboard/sections/irrigation-section';
 import { DiseaseSection } from '@/components/dashboard/sections/disease-section';
@@ -20,6 +20,21 @@ import {
 import { sites } from '@/lib/mock';
 import { Wheat, Radio, Database, Cloud } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+
+// MapLibre GL requires browser APIs (window, WebGL). Dynamically import the
+// map component with SSR disabled to prevent build-time "window is not
+// defined" errors during the Next.js production build / deployment step.
+const MapSection = dynamic(
+  () => import('@/components/dashboard/sections/map-section').then((m) => m.MapSection),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="flex items-center justify-center h-[500px] rounded-lg border bg-muted/30 text-sm text-muted-foreground">
+        Loading map view…
+      </div>
+    ),
+  },
+);
 
 type FilteredSite = SiteId | 'all';
 
