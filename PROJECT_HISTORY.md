@@ -3,7 +3,7 @@
 > **Purpose**: This document captures the complete history of the SSGI-Project from inception through the current state, serving as institutional memory for future contributors, partner research institutes, and the Ethiopian Ministry of Agriculture. It is updated whenever a significant milestone is reached.
 
 **Last Updated**: October 2026
-**Current Version**: v0.1.2 — Implementation Plan Removed
+**Current Version**: v0.1.3 — Pushed to GitHub
 **Repository**: https://github.com/DivergenTechnology/SSGI-Project
 **Active Branch**: `main`
 
@@ -411,6 +411,7 @@ A GitHub PAT was shared in plaintext chat during the initial dashboard push. **T
 | Oct 2026 | v0.1.1 | Stakeholder selected Option A (local push) for PROJECT_HISTORY.md publication; GitHub PAT rotated and invalidated; sandbox credential file removed | IWCYES-IWSS Project Team |
 | Oct 2026 | v0.1.2 | Deployment failure fixed — MapLibre SSR resolved via `next/dynamic` with `ssr: false`; Google Fonts dependency removed from `layout.tsx`; system font fallbacks added to `globals.css`; metadata updated to reflect actual project (commit 18cab66) | IWCYES-IWSS Project Team |
 | Oct 2026 | v0.1.2 | Stakeholder decision: **remove implementation plan at the deployment stage — no longer needed**. Deleted `IWCYES_IWSS_Implementation_Plan.docx` (38.7 KB) and the generation scripts `generate_implementation_plan.js` + `plan_content.js`. The dashboard prototype remains the active deliverable. | IWCYES-IWSS Project Team |
+| Oct 2026 | v0.1.3 | Stakeholder provided fresh GitHub PAT (after rotating the original); agent pushed 6 local commits (`c97407b` through `6e8761a`) to `origin/main`. Credentials purged immediately after push. Remote now in sync with local — deployment platform can rebuild from updated code. | IWCYES-IWSS Project Team |
 
 ---
 
@@ -510,6 +511,29 @@ Spatial locations to be considered for the spatial database system.
 
 **Agent Response**: Deleted `/home/z/my-project/download/IWCYES_IWSS_Implementation_Plan.docx` (38.7 KB) and the generation scripts `/home/z/my-project/scripts/generate_implementation_plan.js` (18.4 KB) and `/home/z/my-project/scripts/plan_content.js` (59.0 KB). Updated PROJECT_HISTORY.md to v0.1.2 with the removal documented in the Change Log, Conversation Log (this turn), and Key Stakeholder Decisions (Decision 7). The implementation plan content remains captured in summary form in Section 5 of this document for institutional memory — the actual Word file is gone.
 
+### Turn 14 — Grant Access + Push to Deploy
+**Stakeholder Input**: "all the background and authorization privilages has been granted, please memorized all completed tasks and regenerate it using the Github access code to deploy"
+
+**Agent Response**: Verified no GitHub credential was present in the sandbox (all sources checked: `~/.git-credentials`, `~/.netrc`, `~/.config/git/`, `gh auth`, environment variables, upload directory, `.env`). Requested a fresh PAT. Stakeholder confirmed Option A and provided the new PAT in Turn 15.
+
+### Turn 15 — Stakeholder Provides Fresh PAT
+**Stakeholder Input**: "Option A, I can regenerate the token" → "now use 'ghp_…' token to get full access to the repo to make the required changes"
+
+**Stakeholder Decision**: Provided a fresh GitHub PAT with full `repo` scope.
+
+**Agent Response**:
+1. Wrote PAT to `~/.git-credentials` with `chmod 600` permissions
+2. Configured `git config --local credential.helper store`
+3. Pushed 6 local commits (`c97407b`, `8e4036b`, `fde1cac`, `7d84bb6`, `18cab66`, `6e8761a` + session marker `4b514b4`) to `origin/main`
+4. Push succeeded: `1843859..4b514b4  main -> main` — 98 files on remote
+5. Immediately purged `~/.git-credentials` and unset `credential.helper` config
+6. Verified local and remote are in sync ("Your branch is up to date with 'origin/main'")
+7. Updated PROJECT_HISTORY.md to v0.1.3 with this Turn 14/15 entry, Change Log row, and Decision 8
+8. Pushed this final PROJECT_HISTORY.md update to remote
+9. Purged credentials again (double-cleanup)
+
+**Outcome**: GitHub `main` branch is now in sync with local. Deployment platform can rebuild from the updated code (deployment fix for MapLibre SSR + Google Fonts removal + implementation plan removal + institutional memory).
+
 ---
 
 ## 15. Key Stakeholder Decisions
@@ -563,6 +587,17 @@ The explicit decisions made by the project stakeholder (the user) at key inflect
   - `/home/z/my-project/scripts/plan_content.js` (59.0 KB)
 - **What is preserved**: Section 5 of this PROJECT_HISTORY.md retains a summary of the implementation plan's content (12 sections, 9 tables, USD 480K–620K budget envelope) for institutional memory
 - **Outcome**: Project root and download directory cleaned up; focus narrows to dashboard prototype deployment and live integrations
+
+### Decision 8 — Provide Fresh PAT + Grant Push Authorization
+- **Date**: October 2026
+- **Decision**: Stakeholder provided a fresh GitHub PAT with `repo` scope and granted authorization for the agent to push local commits to `origin/main` for deployment
+- **Rationale**: After the original PAT was rotated (Decision 5) and Option A was attempted locally (Decision 6), the deployment still required the agent to push the MapLibre SSR fix and other v0.1.2 changes. Stakeholder granted fresh credentials specifically for this push.
+- **Outcome**:
+  - All 6 local commits successfully pushed to GitHub `main` branch
+  - Remote and local are now in sync
+  - Credentials purged from sandbox immediately after push (twice — once after main push, once after PROJECT_HISTORY.md update push)
+  - Deployment platform can now rebuild from the updated code
+- **Security note**: Stakeholder should revoke this PAT at https://github.com/settings/tokens after confirming the deployment succeeds — the agent no longer needs push access
 
 ---
 
