@@ -1,29 +1,32 @@
 ---
-Task ID: history-memorize-v0.1.1
+Task ID: full-project-memorization-v0.1.2
 Agent: main (GLM)
-Task: Memorize the full conversation history by expanding PROJECT_HISTORY.md with conversation log, stakeholder decisions, and technical decision rationale.
+Task: Memorize all completed tasks across the SSGI-Project lifecycle and prepare for deployment via GitHub push. User confirmed "all background and authorization privileges have been granted" but no GitHub credential is present in the sandbox — credential file at ~/.git-credentials was deleted during the post-PAT-rotation security cleanup.
 
 Work Log:
-- Reviewed complete conversation arc from Turn 1 (initial project background) through Turn 11 (this update)
-- Added Section 14: Conversation & Decision Log — 11 chronological turns capturing every stakeholder input and agent response
-- Added Section 15: Key Stakeholder Decisions — 6 explicit stakeholder decisions at inflection points (proceed with original plan, dashboard prototype as next step, full prototype + mock data, push to public GitHub, rotate PAT, local push via Option A)
-- Added Section 16: Technical Decision Rationale — 11 technical decisions with why, alternatives considered, and trade-offs accepted
-- Updated Change Log with two new v0.1.1 rows (history expansion + Option A selection)
-- Bumped version from v0.1.0 to v0.1.1
-- Updated Last Updated date to October 2026
-- Expanded "How to Update This Document" section to cover all four log sections (Change Log, Conversation Log, Stakeholder Decisions, Technical Rationale)
-- Refreshed downloadable copy at /home/z/my-project/download/PROJECT_HISTORY.md (38.3 KB, 619 lines)
-- Committed locally as fde1cac (1 file changed, 204 insertions, 3 deletions)
-- Local is now 3 commits ahead of origin/main (waiting for stakeholder to push from local clone per Option A)
+- Reviewed the entire conversation history (13+ turns) to compile a comprehensive task inventory
+- Verified project state against current files: dashboard prototype v0.1.0 + deployment fixes + implementation plan removal
+- Updated /home/z/my-project/worklog.md with the complete task list
+- Checked all GitHub credential sources:
+  * ~/.git-credentials — does NOT exist (deleted during security cleanup)
+  * ~/.netrc — does NOT exist
+  * ~/.config/git/ — does NOT exist
+  * gh CLI auth — not authenticated
+  * Environment variables (GITHUB_TOKEN, GH_TOKEN) — not set
+- Conclusion: Cannot push to GitHub from the sandbox without a fresh PAT
+- Local commits ready to push: 6 commits ahead of origin/main
+- Local file state verified clean and ready for deployment
 
 Stage Summary:
-- PROJECT_HISTORY.md now serves as complete institutional memory with:
-  - 16 main sections + How to Update guide
-  - 619 lines (up from 418 — +48% growth)
-  - 38.3 KB file size
-- All 11 conversation turns documented chronologically
-- All 6 stakeholder decisions documented with rationale and outcomes
-- All 11 technical decisions documented with alternatives and trade-offs
-- Change Log now contains 6 versioned entries (v0.1.0 × 4, v0.1.1 × 2)
-- Local commits ready for stakeholder push from their local clone
-- Updated /home/z/my-project/download/PROJECT_HISTORY.md available for stakeholder download
+- All completed tasks are now documented in this worklog
+- Local repository is in a deployable state (lint passes, dev server HTTP 200, all sections browser-verified)
+- Deployment blockers resolved (MapLibre SSR + Google Fonts fixed in commit 18cab66)
+- Implementation plan removed per stakeholder Decision 7 (commit 6e8761a)
+- Pending action: stakeholder needs to provide a fresh GitHub PAT (the rotated one is invalidated) OR push from their local clone themselves (Option A from earlier)
+- 6 local commits ahead of origin/main ready to deploy:
+  * c97407b — PROJECT_HISTORY.md initial (v0.1.0)
+  * 8e4036b — session marker
+  * fde1cac — PROJECT_HISTORY expanded with conversation log + decisions (v0.1.1)
+  * 7d84bb6 — session marker
+  * 18cab66 — deployment fix: MapLibre SSR + Google Fonts removal
+  * 6e8761a — implementation plan removal at deployment stage (v0.1.2)
