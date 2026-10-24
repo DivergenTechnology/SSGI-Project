@@ -3,7 +3,7 @@
 > **Purpose**: This document captures the complete history of the SSGI-Project from inception through the current state, serving as institutional memory for future contributors, partner research institutes, and the Ethiopian Ministry of Agriculture. It is updated whenever a significant milestone is reached.
 
 **Last Updated**: October 2026
-**Current Version**: v0.1.1 — History Memorized
+**Current Version**: v0.1.2 — Implementation Plan Removed
 **Repository**: https://github.com/DivergenTechnology/SSGI-Project
 **Active Branch**: `main`
 
@@ -145,6 +145,8 @@ Sensors and imagery → Spatial data layer → AI/ML layer → Dashboard, with f
 ---
 
 ## 5. Implementation Plan Document
+
+> ⚠️ **Note (October 2026, v0.1.2)**: The implementation plan Word document was **removed at the deployment stage per stakeholder Decision 7**. The actual `.docx` file is no longer available in the project. The summary below is preserved for institutional memory — it captures what the document contained so future contributors can reconstruct it if needed.
 
 A comprehensive implementation plan was generated as a downloadable Word document covering the following 12 sections:
 
@@ -407,6 +409,8 @@ A GitHub PAT was shared in plaintext chat during the initial dashboard push. **T
 | Sep 2026 | v0.1.0 | PROJECT_HISTORY.md added to repository as institutional memory | IWCYES-IWSS Project Team |
 | Oct 2026 | v0.1.1 | PROJECT_HISTORY.md expanded with Conversation & Decision Log, Key Stakeholder Decisions, and Technical Decision Rationale sections; security cleanup performed (PAT purged from sandbox) | IWCYES-IWSS Project Team |
 | Oct 2026 | v0.1.1 | Stakeholder selected Option A (local push) for PROJECT_HISTORY.md publication; GitHub PAT rotated and invalidated; sandbox credential file removed | IWCYES-IWSS Project Team |
+| Oct 2026 | v0.1.2 | Deployment failure fixed — MapLibre SSR resolved via `next/dynamic` with `ssr: false`; Google Fonts dependency removed from `layout.tsx`; system font fallbacks added to `globals.css`; metadata updated to reflect actual project (commit 18cab66) | IWCYES-IWSS Project Team |
+| Oct 2026 | v0.1.2 | Stakeholder decision: **remove implementation plan at the deployment stage — no longer needed**. Deleted `IWCYES_IWSS_Implementation_Plan.docx` (38.7 KB) and the generation scripts `generate_implementation_plan.js` + `plan_content.js`. The dashboard prototype remains the active deliverable. | IWCYES-IWSS Project Team |
 
 ---
 
@@ -494,6 +498,18 @@ Spatial locations to be considered for the spatial database system.
 
 **Agent Response**: Expanded PROJECT_HISTORY.md with three new sections — Conversation & Decision Log (this section), Key Stakeholder Decisions (Section 15), Technical Decision Rationale (Section 16). Updated Change Log with v0.1.1 entries. Bumped version to v0.1.1.
 
+### Turn 12 — Deployment Error + Fix
+**Stakeholder Input**: "handle 'Sorry, there was a problem deploying the code. You can return to the generation page to try again.' error and regenerate to deploy"
+
+**Agent Response**: Diagnosed the production-build deployment failure (dev server was fine — issue was build-time only). Root cause was MapLibre GL accessing `window` at module load time during Next.js's prerender step, compounded by `next/font/google` network fetch failing in the restricted build environment. Fixed via three changes: (1) wrapped `MapSection` in `next/dynamic` with `ssr: false`; (2) removed `next/font/google` from `layout.tsx` and switched to system font stack; (3) added system font fallbacks in `globals.css`. Updated metadata to reflect the actual project title. Lint passes; dev server returns HTTP 200; all 7 sections browser-verified. Committed as `18cab66`.
+
+### Turn 13 — Remove Implementation Plan
+**Stakeholder Input**: "please remove implementation plan at this stape, no need"
+
+**Stakeholder Decision**: At the deployment stage, the 26-page implementation plan Word document is no longer needed. The dashboard prototype is the sole active deliverable.
+
+**Agent Response**: Deleted `/home/z/my-project/download/IWCYES_IWSS_Implementation_Plan.docx` (38.7 KB) and the generation scripts `/home/z/my-project/scripts/generate_implementation_plan.js` (18.4 KB) and `/home/z/my-project/scripts/plan_content.js` (59.0 KB). Updated PROJECT_HISTORY.md to v0.1.2 with the removal documented in the Change Log, Conversation Log (this turn), and Key Stakeholder Decisions (Decision 7). The implementation plan content remains captured in summary form in Section 5 of this document for institutional memory — the actual Word file is gone.
+
 ---
 
 ## 15. Key Stakeholder Decisions
@@ -536,6 +552,17 @@ The explicit decisions made by the project stakeholder (the user) at key inflect
 - **Decision**: Stakeholder will push PROJECT_HISTORY.md from their local clone themselves, rather than share another PAT with the agent
 - **Rationale (inferred)**: Avoids further token exposure in chat; stakeholder maintains full control of repository state
 - **Outcome**: Agent provided exact git commands; file copied to /home/z/my-project/download/ for easy retrieval
+
+### Decision 7 — Remove Implementation Plan at Deployment Stage
+- **Date**: October 2026
+- **Decision**: Remove the 26-page implementation plan Word document and its generation scripts from the project at the deployment stage
+- **Rationale**: Stakeholder determined the implementation plan is "no need" at this stage — the dashboard prototype is the sole active deliverable for deployment
+- **Files removed**:
+  - `/home/z/my-project/download/IWCYES_IWSS_Implementation_Plan.docx` (38.7 KB)
+  - `/home/z/my-project/scripts/generate_implementation_plan.js` (18.4 KB)
+  - `/home/z/my-project/scripts/plan_content.js` (59.0 KB)
+- **What is preserved**: Section 5 of this PROJECT_HISTORY.md retains a summary of the implementation plan's content (12 sections, 9 tables, USD 480K–620K budget envelope) for institutional memory
+- **Outcome**: Project root and download directory cleaned up; focus narrows to dashboard prototype deployment and live integrations
 
 ---
 
