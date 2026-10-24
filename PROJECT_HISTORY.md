@@ -2,8 +2,8 @@
 
 > **Purpose**: This document captures the complete history of the SSGI-Project from inception through the current state, serving as institutional memory for future contributors, partner research institutes, and the Ethiopian Ministry of Agriculture. It is updated whenever a significant milestone is reached.
 
-**Last Updated**: September 2026
-**Current Version**: v0.1.0 — Dashboard Prototype
+**Last Updated**: October 2026
+**Current Version**: v0.1.1 — History Memorized
 **Repository**: https://github.com/DivergenTechnology/SSGI-Project
 **Active Branch**: `main`
 
@@ -24,6 +24,9 @@
 11. [Open Items and Pending Integrations](#11-open-items-and-pending-integrations)
 12. [Security and Operational Notes](#12-security-and-operational-notes)
 13. [Change Log](#13-change-log)
+14. [Conversation & Decision Log](#14-conversation--decision-log)
+15. [Key Stakeholder Decisions](#15-key-stakeholder-decisions)
+16. [Technical Decision Rationale](#16-technical-decision-rationale)
 
 ---
 
@@ -402,12 +405,210 @@ A GitHub PAT was shared in plaintext chat during the initial dashboard push. **T
 | Sep 2026 | v0.1.0 | Implementation Plan Word document generated (26 pages, 12 sections, 9 tables) | IWCYES-IWSS Project Team |
 | Sep 2026 | v0.1.0 | Feasibility analysis performed; 14 critical limitations identified; 10 recommended adjustments proposed (deferred by stakeholder) | IWCYES-IWSS Project Team |
 | Sep 2026 | v0.1.0 | PROJECT_HISTORY.md added to repository as institutional memory | IWCYES-IWSS Project Team |
+| Oct 2026 | v0.1.1 | PROJECT_HISTORY.md expanded with Conversation & Decision Log, Key Stakeholder Decisions, and Technical Decision Rationale sections; security cleanup performed (PAT purged from sandbox) | IWCYES-IWSS Project Team |
+| Oct 2026 | v0.1.1 | Stakeholder selected Option A (local push) for PROJECT_HISTORY.md publication; GitHub PAT rotated and invalidated; sandbox credential file removed | IWCYES-IWSS Project Team |
+
+---
+
+## 14. Conversation & Decision Log
+
+A chronological record of the conversation that produced this project. Captures every input received from the stakeholder and every consequential decision made in response.
+
+### Turn 1 — Initial Project Background Provided
+**Stakeholder Input**: Provided comprehensive background document covering:
+- Ethiopian agricultural sector context (46% GDP, 83% exports, 80% employment, 120M population)
+- Cattle population as largest in Africa
+- Structural challenges (land degradation, recurrent drought, low tech adoption)
+- Government priority for agricultural modernization
+- Promise of remote sensing (satellite, UAV, proximal sensors)
+- Data science / ML / AI advances
+- General objective: develop remote sensing-enabled tools, services, and decision-support system for irrigated wheat farming systems
+- Scope: irrigated wheat farmlands of Ethiopia
+- Four deliverables: (i) spatial database, (ii) IWCYES, (iii) information products (maps + statistics), (iv) IWSS
+
+**Agent Response**: Acknowledged context, summarized understanding, indicated readiness for additional prompts.
+
+### Turn 2 — Pilot Study Areas Added
+**Stakeholder Input**: Specified three pilot agricultural research institutes:
+- Bishoftu (Debre Zeit)
+- Asella
+- Ambo
+
+Spatial locations to be considered for the spatial database system.
+
+**Agent Response**: Captured coordinates (~8.75°N, 39.00°E for Bishoftu; ~7.96°N, 39.17°E for Asella; ~8.98°N, 37.79°E for Ambo), outlined spatial database implications (UTM Zone 37N / WGS84, multi-scale AOI handling, spatial layers).
+
+### Turn 3 — IoT, Firebase, Dashboard Requirements Added
+**Stakeholder Input**: Specified:
+- Precise irrigation scheduling driven by soil moisture + humidity per AOI
+- Soil properties to be collected using NPK devices
+- Values to be published on Firebase infrastructure
+- Shapefiles to be collected from each study area for the spatial database
+- Decision-support dashboard with state-of-the-art visualization, real insights, different attention mechanism, map overlays for specific farming fields
+
+**Agent Response**: Updated technical architecture (IoT → Firebase → PostGIS → ML → Dashboard), identified dashboard components (map overlay engine, attention mechanism visualizations, real-time insights).
+
+### Turn 4 — UAV Disease Detection + Index Fusion Added
+**Stakeholder Input**: Added:
+- UAV imagery to be used for wheat disease early detection
+- Different indexing values to be integrated with soil properties for wheat yield computation
+
+**Agent Response**: Added UAV multispectral module (DJI P4 Multispectral, 50–100 m AGL, OpenDroneMap), specified vegetation indices table (NDVI, EVI, NDRE, GNDVI, NDMI, LAI, SAVI, VARI), defined fusion approach (indices + soil NPK + weather + management features → ML regression).
+
+### Turn 5 — Implementation Plan Requested
+**Stakeholder Input**: "now generate implementation plan with downloadable word file"
+
+**Agent Response**: Loaded docx skill, asked 6 clarifying questions (audience, length, time horizon, sections, design style, language). Stakeholder did not answer; agent proceeded with sensible defaults (mixed audience, ~25 pages, 12-month horizon, all sections, government formal style, English).
+
+### Turn 6 — Implementation Plan Generated
+**Stakeholder Input**: (Repeated request — implicitly "just do it") "now generate implementation plan with downloadable word file"
+
+**Agent Response**: Generated `/home/z/my-project/download/IWCYES_IWSS_Implementation_Plan.docx` (38.7 KB, 26 pages, 12 chapters, 9 substantive tables). Passed all critical post-generation checks (0 errors).
+
+### Turn 7 — Feasibility Check Requested
+**Stakeholder Input**: "please, I need you to check strong implementation possibility and limitation without hesitation before proceeding the next step"
+
+**Agent Response**: Performed critical feasibility analysis. Identified 5 strengths, 14 critical limitations, 10 recommended adjustments. Conclusion: **Conditional GO** — only if the 10 adjustments were adopted. Most consequential risks: single growing season (insufficient ground truth), in-situ data scarcity, counterpart capacity gap.
+
+### Turn 8 — Stakeholder Decision: Proceed with Original Plan
+**Stakeholder Input**: "Proceed with the original plan and start on a different next step (e.g., dashboard prototype, spatial DB schema design) push the code to 'https://github.com/DivergenTechnology/SSGI-Project', use 'ghp_...' token to get the access for deployment. Request me for any confirmations during implementation."
+
+**Stakeholder Decision**: Explicitly chose to proceed WITHOUT the 10 recommended adjustments. Granted agent autonomy to pick the next step (dashboard prototype was chosen). Provided GitHub PAT for repository access. Authorized agent to request confirmations during implementation.
+
+**Agent Response**: Loaded fullstack-dev skill, initialized Next.js 16 environment, installed MapLibre, built the full dashboard prototype (7 sections, 60 plots of mock data), pushed to GitHub (commit 88b9a2b). All sections browser-verified via Agent Browser. Added README and pushed (commit 1843859).
+
+### Turn 9 — Memorize History Request
+**Stakeholder Input**: "try to memorize all the history to update publish"
+
+**Agent Response**: Created comprehensive PROJECT_HISTORY.md (418 lines, 13 sections + change log). Committed locally (commit c97407b). Push failed because the original GitHub PAT had been rotated by the stakeholder (good security practice). Local and remote had diverged (stakeholder had pushed README directly); performed `git rebase origin/main` to reconcile cleanly. Requested new PAT or alternative push strategy.
+
+### Turn 10 — Stakeholder Decision: Push Locally
+**Stakeholder Input**: "Option A"
+
+**Stakeholder Decision**: Chose Option A — push PROJECT_HISTORY.md from their local clone themselves, rather than sharing another PAT with the agent.
+
+**Agent Response**: Copied PROJECT_HISTORY.md to /home/z/my-project/download/ for easy retrieval. Cleaned up sandbox security (deleted `~/.git-credentials`, unset `credential.helper` config). Provided exact git commands for the stakeholder to run in their local clone.
+
+### Turn 11 — Memorize History (This Update)
+**Stakeholder Input**: "memorize the history"
+
+**Agent Response**: Expanded PROJECT_HISTORY.md with three new sections — Conversation & Decision Log (this section), Key Stakeholder Decisions (Section 15), Technical Decision Rationale (Section 16). Updated Change Log with v0.1.1 entries. Bumped version to v0.1.1.
+
+---
+
+## 15. Key Stakeholder Decisions
+
+The explicit decisions made by the project stakeholder (the user) at key inflection points. These decisions shape the project's direction and should not be reversed without explicit stakeholder sign-off.
+
+### Decision 1 — Proceed with Original Plan (Without Feasibility Adjustments)
+- **Date**: September 2026
+- **Decision**: Proceed with the original 12-month, USD 480–620K, single-season implementation plan
+- **Rejected Alternative**: The 10 recommended adjustments (extend to 18 months, raise budget to USD 600–720K, scale sensors to 100+, etc.)
+- **Implication**: The project accepts the documented risks (single growing season, sparse in-situ data, attention mechanism overreach, Firebase free-tier limits, etc.) for the pilot phase
+- **Open Question**: Will the 10 adjustments be revisited for the scale-up phase?
+
+### Decision 2 — Dashboard Prototype as Next Step
+- **Date**: September 2026
+- **Decision**: Build a dashboard prototype (vs. spatial database schema design) as the next step after the implementation plan
+- **Rationale (inferred)**: Dashboard is the most visible deliverable for decision-makers; demonstrates value proposition fastest
+- **Outcome**: 7-section Next.js 16 dashboard prototype successfully built and pushed to GitHub
+
+### Decision 3 — Full Prototype + Hardcoded Mock Data
+- **Date**: September 2026
+- **Decision**: Build full prototype covering all 7 sections with hardcoded mock data (vs. focused MVP with stub Firebase client)
+- **Rationale (inferred by agent)**: Gives complete demo artifact to show stakeholders, ships in one pass, can be wired to real Firebase later
+- **Outcome**: 60 plots of mock data, 100+ sensors, 60 yield predictions, 60 irrigation recs, 20 disease alerts
+
+### Decision 4 — Push to Public GitHub Repository
+- **Date**: September 2026
+- **Decision**: Push dashboard code to https://github.com/DivergenTechnology/SSGI-Project (public)
+- **Rationale (inferred)**: Public repo for stakeholder visibility, future contributor onboarding, institutional memory
+- **Outcome**: 99 files pushed across 4 commits
+
+### Decision 5 — Rotate GitHub PAT
+- **Date**: September 2026
+- **Decision**: Rotate the GitHub PAT that was shared in plaintext chat
+- **Rationale**: Best-practice security response to token exposure
+- **Outcome**: Agent can no longer push to GitHub; subsequent PROJECT_HISTORY.md push handed back to stakeholder
+
+### Decision 6 — Local Push of PROJECT_HISTORY.md (Option A)
+- **Date**: October 2026
+- **Decision**: Stakeholder will push PROJECT_HISTORY.md from their local clone themselves, rather than share another PAT with the agent
+- **Rationale (inferred)**: Avoids further token exposure in chat; stakeholder maintains full control of repository state
+- **Outcome**: Agent provided exact git commands; file copied to /home/z/my-project/download/ for easy retrieval
+
+---
+
+## 16. Technical Decision Rationale
+
+Captures the *why* behind each technical decision made during the dashboard prototype build. This section exists so future contributors understand the trade-offs considered, not just the final choices.
+
+### Decision: Next.js 16 + TypeScript + Tailwind 4 + shadcn/ui
+- **Why**: Standard production-grade stack with active community; Turbopack for fast dev iteration; shadcn/ui provides high-quality component primitives without lock-in
+- **Alternatives Considered**: Plain React + Vite (rejected — lacks App Router conventions), Vue 3 + Nuxt (rejected — smaller talent pool in Ethiopia), Angular (rejected — heavier framework, less flexible for prototypes)
+
+### Decision: MapLibre GL JS (not Leaflet, not Google Maps)
+- **Why**: Open-source, vector tiles, no API key required, modern WebGL rendering, supports all OGC WMS layers we'll need from GeoServer
+- **Alternatives Considered**: Leaflet (simpler but raster-only, lacks vector tile performance), Google Maps JS API (rejected — requires API key, vendor lock-in, ToS concerns for agricultural data), OpenLayers (more powerful but steeper learning curve)
+- **Trade-off accepted**: MapLibre v6 changed export semantics (no default export); required migration from `import maplibregl from` to `import { Map as MaplibreMap } from`
+
+### Decision: Recharts (not D3 directly, not Chart.js, not Visx)
+- **Why**: React-native component model, good documentation, all chart types needed (line, bar, pie, radar) in one package, lightweight bundle
+- **Alternatives Considered**: D3.js directly (rejected — too low-level for prototype velocity), Chart.js (rejected — React integration is awkward), Visx (rejected — too low-level, requires more glue code)
+- **Trade-off accepted**: D3.js is still used directly for the attention heatmap color interpolation (Recharts doesn't support custom cell colors based on value out of the box)
+
+### Decision: Hardcoded mock data (not stub Firebase client)
+- **Why**: Fastest path to a working demo; no external dependencies; can be replaced with real Firebase later by swapping the data layer
+- **Alternatives Considered**: Stub Firebase client with mock credentials (rejected — adds setup time, harder to demo offline)
+- **Trade-off accepted**: All data is currently synthetic; live integrations remain pending
+
+### Decision: Single-page app with section state (not multi-page routing)
+- **Why**: Skill instructions explicitly limited visible routes to `/` only; section switching via React `useState` is the standard pattern for dashboards anyway
+- **Alternatives Considered**: Multi-page Next.js App Router (rejected — sandbox constraint)
+- **Trade-off accepted**: No deep-linkable URLs for sections; back button doesn't navigate between sections (acceptable for a prototype)
+
+### Decision: Synthetic plot coordinates (not real shapefiles)
+- **Why**: Field-collected shapefiles from Bishoftu/Asella/Ambo are not yet available (per WP2 schedule, they're collected in Months 1–3 of the actual project)
+- **Alternatives Considered**: Wait for real shapefiles (rejected — blocks prototype), use OSM building footprints (rejected — not irrigated wheat plots)
+- **Trade-off accepted**: Plot positions are perturbations around site centers; doesn't represent actual field geometry
+
+### Decision: FG-1 Forest Mint palette for cover (not GO-1 default for proposals)
+- **Why**: FG-1 is the agriculture/sustainability palette per the docx skill design system; aligns with the project's environmental/agricultural theme better than the GO-1 Graphite Orange default
+- **Alternatives Considered**: GO-1 Graphite Orange (rejected — too generic for an agricultural project), GV-1 Official Red (rejected — wrong connotation for agricultural modernization)
+- **Trade-off accepted**: None — palette choice was a clear fit
+
+### Decision: R4 (Top Color Block) cover recipe
+- **Why**: R4 is the standard recipe for proposals/plans per docx skill routing
+- **Alternatives Considered**: R1 Pure Paragraph Left (more versatile but less visually distinctive for a proposal), R2 Double-Rule Frame (more for whitepapers)
+- **Trade-off accepted**: R4 has poor long-title tolerance; mitigated by using short title "Implementation Plan" with a longer subtitle
+
+### Decision: 12-month timeline (not 18–24 months as recommended)
+- **Why**: Stakeholder explicitly chose original plan; pilot-scale scope intended for single Meher growing season
+- **Alternatives Considered**: 18-month timeline covering 2 growing seasons (rejected by stakeholder — risk accepted)
+- **Trade-off accepted**: Single yield ground-truth data point per plot — model accuracy will be lower in Year 1; documented in feasibility analysis limitations
+
+### Decision: Skip the 10 feasibility adjustments (random forest baseline, counterpart bootcamp, MLflow, etc.)
+- **Why**: Stakeholder chose original plan; adjustments remain on record for scale-up phase consideration
+- **Alternatives Considered**: Adopt all 10 adjustments (rejected by stakeholder — would have raised budget to USD 600–720K and extended timeline)
+- **Trade-off accepted**: Higher technical and sustainability risks for the pilot phase; documented infeasibility analysis
+
+### Decision: Map uses no external tile source (synthetic background color)
+- **Why**: Prototype must run in sandboxed environment without external network dependencies on tile providers (OSM, Mapbox, ESRI); also avoids potential rate-limit issues during demo
+- **Alternatives Considered**: OSM raster tiles (rejected — requires network), Mapbox tiles (rejected — requires API key), ESRI World Imagery (rejected — requires network)
+- **Trade-off accepted**: Map background is a flat color (`#f1f5f4`); production deployment will swap this for Sentinel-2 RGB composite via GeoServer WMS
+
+### Decision: Use PAT via `~/.git-credentials` (not via URL embedding)
+- **Why**: Avoids token exposure in commit URLs / shell history visible to other processes; git credential helper is the standard secure mechanism
+- **Alternatives Considered**: Token in push URL (rejected — visible in shell history), GitHub CLI `gh auth login` (rejected — would require interactive auth flow)
+- **Trade-off accepted**: PAT was still exposed in plaintext chat by stakeholder; security cleanup (file deletion, credential.helper unset) performed after stakeholder rotated the token
 
 ---
 
 ## How to Update This Document
 
-When making changes to the project, append a new row to the **Change Log** table above with:
+When making changes to the project, append new rows to the **Change Log** (Section 13) and new entries to the **Conversation & Decision Log** (Section 14). For significant stakeholder decisions, add a new entry to **Key Stakeholder Decisions** (Section 15). For significant technical decisions, add a new entry to **Technical Decision Rationale** (Section 16).
+
+Each update should include:
 - Date (month + year)
 - Version (semantic versioning: `vMAJOR.MINOR.PATCH`)
 - Brief change description (1–2 sentences)
